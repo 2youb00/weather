@@ -45,7 +45,6 @@ async function getAPI(city_name){
 }
 
 
-getAPI("ferdjioua");
 
 // get the locatoin *************************************************
 
@@ -56,6 +55,7 @@ async  function locatoinAPI(latitude,longitude){
     console.log(data);
     console.log(data.locality);
     getAPI(data.locality);
+    local_storage_save(data.locality);
 }
 function locatoin(){
     const success =(position)=>{
@@ -87,3 +87,16 @@ document.addEventListener('keypress', function(event) {
     locationbtn.style.backgroundColor = '#fff';
     }
 })
+
+/// local storage ***************************************************************
+
+function local_storage_save(city_name){
+    localStorage.setItem('city_saved',city_name)
+}
+
+if(localStorage.city_saved==null){
+    getAPI("ferdjioua");
+}
+else{
+    getAPI(localStorage.city_saved);
+}
